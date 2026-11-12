@@ -1,0 +1,6 @@
+{
+  "name": "EpochLife",
+  "description": "A deep text-based life and dynasty simulator featuring causal narratives, dynamic economies, relationships, and cloud legacy persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
