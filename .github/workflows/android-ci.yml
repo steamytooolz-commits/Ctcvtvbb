@@ -24,6 +24,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -113,6 +115,8 @@ jobs:
       - name: Set up Android SDK
         if: steps.check_keystore.outputs.has_keystore == 'true'
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Set up Gradle
         if: steps.check_keystore.outputs.has_keystore == 'true'
@@ -125,6 +129,13 @@ jobs:
         run: |
           if [ ! -f .env ] && [ -f .env.example ]; then
             cp .env.example .env
+          fi
+
+      - name: Prepare debug.keystore
+        if: steps.check_keystore.outputs.has_keystore == 'true'
+        run: |
+          if [ -f debug.keystore.base64 ] && [ ! -f debug.keystore ]; then
+            base64 --decode debug.keystore.base64 > debug.keystore
           fi
 
       - name: Decode Release Keystore
